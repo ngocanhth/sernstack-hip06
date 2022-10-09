@@ -7,7 +7,7 @@ const cloudinary = require('cloudinary').v2;
 // READ
 export const getBooks = ({ page, limit, order, name, available, price, ...query }) => new Promise(async (resolve, reject) => {
     try {
-        const queries = { raw: true, nest: true } // nest: true -> lấy data từ bảng khác dựa vào khóa ngoại nó sẽ gom thành 1 object nested object, trả về 1 object có các field cạnh nhau không phải lồng vào object để lấy data
+        const queries = { raw: true, nest: true } // nest: true -> lấy data từ bảng khác dựa vào khóa ngoại nó sẽ gom thành 1 object nested object, nếu không phí client nhìn vào category_code sẽ không biết thông tin của category là gì
         const offsetStep = (!page || +page <= 1) ? 0 : (+page - 1) 
         const fLimit = +limit || +process.env.LIMIT_BOOK
         queries.offset = offsetStep * fLimit // offset là số bản ghi bị bỏ qua
@@ -17,9 +17,9 @@ export const getBooks = ({ page, limit, order, name, available, price, ...query 
         if (price) query.price = { [Op.between]: price }
         if (available) query.available = { [Op.gt]: available }
         const response = await db.Book.findAndCountAll({
-            // logging: (sql, queryObject) => {
-            //     sendToElasticAndLogToConsole(sql, queryObject)
-            // },
+            logging: (sql, queryObject) => {
+                sendToElasticAndLogToConsole(sql, queryObject)
+            },
 
             where: query,
             ...queries,
@@ -67,7 +67,7 @@ export const createNewBook = (body, fileData) => new Promise(async (resolve, rej
         })
         resolve({
             err: response[1] ? 0 : 1,
-            mes: response[1] ? 'Created' : 'Cannot create new book',
+            mes: response[1] ? 'Created' : 'The title of the book already exists',
         })
         if (fileData && !response[1]) cloudinary.uploader.destroy(fileData.filename)
     } catch (error) {

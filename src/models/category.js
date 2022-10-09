@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
             set(value) {
                 this.setDataValue('value', value.charAt(0).toUpperCase() + value.slice(1))
             }
+            // set name capitalize
         }
     }, {
         sequelize,
