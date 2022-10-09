@@ -1,0 +1,41 @@
+GET http://localhost:5000/api/v1/user/ffsfsdfdsfdsfdsfdsf
+
+###
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "email": "ngocanh10@gmail.com",
+    "password": "Admi5n123"
+}
+
+###
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "ngocanh10@gmail.com",
+    "password": "Admin$123"
+}
+
+###
+GET http://localhost:5000/api/v1/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoibmdvY2FuaDEwQGdtYWlsLmNvbSIsInJvbGVfY29kZSI6IlIzIiwiaWF0IjoxNjY1MjQ0MDczLCJleHAiOjE2NjU2NzYwNzN9.6NwH0UggjegFfm3zgTFuMeLUSdxwqCzPBnfwh5Xr948
+
+
+
+###
+GET http://localhost:5000/api/v1/insert/
+
+###
+GET http://localhost:5000/api/v1/insert/
+
+###
+GET http://localhost:5000/api/v1/book/?name=a&order[]=price&order[]=DESC&page=22&limit=6
+
+###
+GET http://localhost:5000/api/v1/book/?available=19
+
+###
+GET http://localhost:5000/api/v1/book/?price[]=10&price[]=50
+

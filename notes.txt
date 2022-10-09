@@ -1,0 +1,18 @@
+yarn init -g
+
+https://sequelize.org/docs/v6/other-topics/migrations/
+
+npm install --save sequelize
+
+npm install --save mysql2
+
+npm install --save-dev sequelize-cli
+
+npx sequelize-cli init
+
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+
+npx sequelize-cli db:migrate
+
+@babel/preset-env viet js theo es 5 6 cu moi nhu nhau
+@babel/node chay dc da bang babel
